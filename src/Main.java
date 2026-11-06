@@ -63,10 +63,7 @@ public class Main {
     }
     public static boolean fullBoard ( int n)
     {
-        if(n ==42)
-        {
-            return true;
-        }
+        if(n ==42) return true;
         else return false;
     }
     public static int[] compMove(int[][] grid, int n)
