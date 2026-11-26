@@ -143,19 +143,40 @@ public class Board
 
         return count >= 4;
     }
+
     public void displayBoard()
     {
-        for (int i = 0; i < grid.length; i++)
+        System.out.println();
+        System.out.println("      CONNECT 4");
+        System.out.println();
+
+        // Column numbers
+        System.out.println("   1   2   3   4   5   6   7");
+        System.out.println(" +---+---+---+---+---+---+---+");
+
+        for (int r = 0; r < 6; r++)
         {
-            for (int j = 0; j < grid[i].length; j++)
+            System.out.print(" |");
+
+            for (int c = 0; c < 7; c++)
             {
-                System.out.print(grid[i][j] + " ");
+                if (grid[r][c] == 1)
+                    System.out.print(" X |");
+                else if (grid[r][c] == 2)
+                    System.out.print(" O |");
+                else
+                    System.out.print("   |");
             }
+
             System.out.println();
+            System.out.println(" +---+---+---+---+---+---+---+");
         }
 
-        System.out.println("0 1 2 3 4 5 6");
+        System.out.println();
+        System.out.println(" X = You     O = Computer");
+        System.out.println();
     }
+
     public int testDrop( int col)
     {
         for (int i = 5; i >= 0; i--)
@@ -181,6 +202,16 @@ public class Board
         }
 
         return -1; // Column is full
+    }
+    public boolean isFull()
+    {
+        for (int c = 0; c < 7; c++)
+        {
+            if (grid[0][c] == 0)
+                return false;
+        }
+
+        return true;
     }
 
 }
