@@ -10,7 +10,6 @@ public class Main {
         //player 1 = 1
         //player 2 = 2
         boolean win1 = true;
-        int turnNum =0;
         //game loop
         while(win1)
         {
@@ -19,8 +18,16 @@ public class Main {
             // comp turn
             long start = System.nanoTime();
 
-            int[] rowCol = comp.compMove(board, 2);
+            int[] rowCol = comp.compMove(board);
+            if (rowCol[0] == -1 || rowCol[1] == -1)
+            {
+                if (board.isFull())
+                    System.out.println("draw!");
+                else
+                    System.out.println("Computer could not find a valid move.");
 
+                break;
+            }
             long end = System.nanoTime();
 
             System.out.println("Search time: " + (end - start) / 1_000_000 + " ms");
@@ -34,9 +41,8 @@ public class Main {
                 break;
             }
 
-            turnNum++;
 
-            if(Board.fullBoard(turnNum))
+            if(board.isFull())
             {
                 System.out.println("draw!");
                 win1 = false;
@@ -45,12 +51,14 @@ public class Main {
             //players turn
                 while (true)
                 {
-                    System.out.println("Pick a column (0-6):");
+                    System.out.println("Pick a column (1-7):");
                     c = in.nextInt();
+                    c--;
+
 
                     if (c < 0 || c >= 7)
                     {
-                        System.out.println("Invalid column. Pick 0-6.");
+                        System.out.println("Invalid column. Pick 1-7.");
                         continue;
                     }
 
@@ -70,8 +78,7 @@ public class Main {
                 break;
             }
 
-            turnNum++;
-            if(Board.fullBoard(turnNum))
+            if(board.isFull())
             {
                 System.out.println("draw!");
                 win1 = false;
